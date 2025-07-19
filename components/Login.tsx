@@ -1,5 +1,5 @@
 import React from 'react';
-import Layout from './Layout';
+import { useRouter } from 'next/router';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
@@ -10,16 +10,20 @@ const LoginSchema = Yup.object().shape({
 });
 
 const Login: React.FC = () => {
+  const router = useRouter();
   return (
     <>
       <h1 className="login-title">Sign in</h1>
       <Formik
         initialValues={{ email: '', password: '', remember: false }}
         validationSchema={LoginSchema}
-        onSubmit={(values, { setSubmitting }) => {
-          // TODO: Handle form submission
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
+        onSubmit={async (values, { setSubmitting }) => {
+          setSubmitting(true);
+          // Simulate login success
+          setTimeout(() => {
+            router.push('/');
+            setSubmitting(false);
+          }, 500);
         }}
       >
         {({ isSubmitting }) => (
