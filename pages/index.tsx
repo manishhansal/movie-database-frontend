@@ -1,6 +1,6 @@
+import React from 'react';
+import Login from '../components/Login';
 
-export default function Home() {
-  return (
-    <h1>Hello World!</h1>
-  );
-}
+const Home: React.FC = () => <Login />;
+
+export default Home;
