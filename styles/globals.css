@@ -401,6 +401,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 .movie-details-card {
   display: flex;
@@ -481,4 +482,153 @@ body {
 .login-signup-btn:hover, .login-signup-btn:focus {
   background: #2ee59d;
   color: #18404a;
+}
+
+.movies-search-input {
+  background: #25444f;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1.1rem;
+  font-size: 1.08rem;
+  margin-left: 1.2rem;
+  outline: none;
+  transition: border 0.18s, box-shadow 0.18s;
+}
+.movies-search-input:focus {
+  border: 2px solid #2ee59d;
+  box-shadow: 0 0 0 2px #2ee59d33;
+}
+
+.highlight {
+  background: #2ee59d;
+  color: #18404a;
+  border-radius: 3px;
+  padding: 0 2px;
+}
+.movies-search-clear {
+  background: none;
+  border: none;
+  color: #2ee59d;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0 0.5rem;
+  border-radius: 50%;
+  transition: background 0.18s;
+  line-height: 1;
+}
+.movies-search-clear:hover {
+  background: #2ee59d22;
+}
+.movies-results-count {
+  color: #b0c4cc;
+  font-size: 1.08rem;
+  margin: 0 0 18px 0;
+  text-align: right;
+}
+.movie-card-actions {
+  display: flex;
+  gap: 8px;
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s;
+}
+.movie-card:hover .movie-card-actions {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Optionally style the placeholder image */
+.movie-image[src*='placeholder-movie.png'] {
+  background: #25444f;
+  object-fit: contain;
+  filter: grayscale(0.2);
+}
+
+.movie-edit-btn, .movie-delete-btn {
+  background: none;
+  border: 1.5px solid #2ee59d;
+  color: #2ee59d;
+  font-size: 0.98rem;
+  font-weight: 600;
+  border-radius: 7px;
+  padding: 0.3rem 1.1rem;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+}
+.movie-edit-btn:hover {
+  background: #2ee59d;
+  color: #18404a;
+}
+.movie-delete-btn {
+  border-color: #ff6b6b;
+  color: #ff6b6b;
+}
+.movie-delete-btn:hover {
+  background: #ff6b6b;
+  color: #fff;
+}
+.movie-descr {
+  color: #b0c4cc;
+  font-size: 0.98rem;
+  margin-top: 2px;
+  word-break: break-word;
+}
+
+.movie-back-btn {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  background: none;
+  border: 1.5px solid #2ee59d;
+  color: #2ee59d;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+  z-index: 2;
+}
+.movie-back-btn:hover {
+  background: #2ee59d;
+  color: #18404a;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-box {
+  background: #18404a;
+  border-radius: 14px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.18);
+  padding: 2.2rem 2.5rem 2rem 2.5rem;
+  min-width: 320px;
+  max-width: 90vw;
+  text-align: center;
+}
+.modal-title {
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+}
+.modal-message {
+  color: #b0c4cc;
+  font-size: 1.08rem;
+  margin-bottom: 1.5rem;
+}
+.modal-actions {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
 }
