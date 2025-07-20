@@ -26,7 +26,7 @@ const Dashboard: React.FC = () => {
   return (
     <div className="movies-container">
       <header className="movies-header">
-        <h1 className="movies-title">Dashboard{userName ? ` — Welcome, ${userName}` : ''}</h1>
+        <h1 className="movies-title">{userName ? `Welcome, ${userName}` : ''}</h1>
         <div className="movies-header-actions">
           <button className="add-movie-btn" onClick={() => router.push('/add-movie')}>Add New Movie</button>
           <button className="logout-btn" onClick={handleLogout}>Logout</button>

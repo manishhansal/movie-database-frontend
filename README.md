@@ -1,40 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Movie Database Frontend
+
+This is a modern Movie Database web application built with [Next.js](https://nextjs.org), React, and TypeScript. It features authentication, full movie CRUD, search, pagination, and a beautiful, responsive UI.
+
+## Features
+
+- **Authentication**: Signup, login, and logout with JWT token storage
+- **Movie CRUD**: Add, edit, delete, and view movie details
+- **Search & Pagination**: Search movies by name/description and paginate results
+- **Image Previews**: Upload and preview images for movies (optional, placeholder only)
+- **Responsive UI**: Clean, modern design with custom modals and toasts
+- **API Integration**: Connects to a backend at `http://localhost:9000` (configurable)
+- **Protected Routes**: Only logged-in users can access dashboard and movie pages
+- **Custom Modals**: For delete confirmations and error handling
 
 ## Getting Started
 
-First, run the development server:
+1. **Install dependencies:**
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+2. **Configure API base URL (optional):**
+   - By default, the app uses `http://localhost:9000` for API calls.
+   - To change, set the environment variable `NEXT_PUBLIC_API_BASE_URL` in a `.env.local` file:
+     ```env
+     NEXT_PUBLIC_API_BASE_URL=http://your-api-url:9000
+     ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. **Run the development server:**
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Usage
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- **Login/Signup:**
+  - Visit `/login` or `/signup` to create an account or log in.
+- **Dashboard:**
+  - After login, view all movies, search, paginate, add, edit, or delete movies.
+- **Add/Edit Movie:**
+  - Use the form to add or edit movies. Image upload is for preview only.
+- **Movie Details:**
+  - Click a movie card to view details, edit, or delete the movie.
+- **Logout:**
+  - Use the logout button in the dashboard header.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+## Tech Stack
+- Next.js (React, TypeScript)
+- Formik & Yup (forms and validation)
+- react-toastify (toasts)
+- Custom CSS (responsive, modern UI)
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## API
+- Expects a backend at `http://localhost:9000` with endpoints for authentication and movies CRUD.
+- See `api/auth.ts` and `api/movies.ts` for details.
 
-## Learn More
+## Customization
+- To enable real image uploads, update the API and form logic in `add-movie.tsx` and `edit-movie.tsx`.
+- To change the UI, edit styles in `styles/globals.css` and components in `components/`.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+Built with ❤️ using Next.js and React.

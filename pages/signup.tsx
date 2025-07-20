@@ -9,7 +9,7 @@ const SignupSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
   email: Yup.string().email('Invalid email').required('Email is required'),
   password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
-  profile: Yup.mixed(),
+  // profile: Yup.mixed(), // Not required
 });
 
 const SignupPage: React.FC = () => {
@@ -21,10 +21,9 @@ const SignupPage: React.FC = () => {
     <div className="add-movie-container">
       <h1 className="add-movie-title">Sign up</h1>
       <Formik
-        initialValues={{ name: '', email: '', password: '', profile: null }}
+        initialValues={{ name: '', email: '', password: '' }}
         validationSchema={SignupSchema}
         onSubmit={async (values, { setSubmitting }) => {
-          setSubmitting(false);
           try {
             await signupApi({
               name: values.name,
@@ -41,7 +40,7 @@ const SignupPage: React.FC = () => {
           }
         }}
       >
-        {({ setFieldValue, isSubmitting }) => (
+        {({ setFieldValue, isSubmitting, errors }) => (
           <Form className="add-movie-form">
             <div className="add-movie-dropzone" onClick={() => fileInputRef.current?.click()}>
               {profilePreview ? (
@@ -74,6 +73,7 @@ const SignupPage: React.FC = () => {
                 )}
               </Field>
             </div>
+           
             <div className="add-movie-fields">
               <Field name="name" placeholder="Name" className="login-input add-movie-input" />
               <ErrorMessage name="name" component="div" className="login-error" />
