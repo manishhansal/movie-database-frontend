@@ -452,3 +452,33 @@ body {
     height: 220px;
   }
 }
+
+.login-signup-row {
+  margin-top: 1.5rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.login-signup-label {
+  color: #b0c4cc;
+  font-size: 1.08rem;
+}
+.login-signup-btn {
+  background: none;
+  color: #2ee59d;
+  border: 1.5px solid #2ee59d;
+  font-size: 1.15rem;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 0.3rem 1.2rem;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+  outline: none;
+  margin-left: 0.2rem;
+}
+.login-signup-btn:hover, .login-signup-btn:focus {
+  background: #2ee59d;
+  color: #18404a;
+}
