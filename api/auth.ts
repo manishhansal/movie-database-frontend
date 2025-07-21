@@ -1,4 +1,4 @@
-const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:9000';
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://54.173.5.99:9000';
 
 export type User = {
   id?: string;
