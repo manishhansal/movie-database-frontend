@@ -93,13 +93,70 @@ const MoviePage: React.FC = () => {
     setPendingDeleteId(null);
   };
 
-  if (loading) {
-    return <div className="movies-empty-container"><div className="movies-empty-title">Loading movies...</div></div>;
-  }
-  if (error) {
-    return <div className="movies-empty-container"><div className="movies-empty-title">{error}</div></div>;
-  }
-  if (movies.length === 0) {
+  const renderContent = () => {
+    if (loading) {
+      return <div className="movies-empty-container"><div className="movies-empty-title">Loading movies...</div></div>;
+    }
+    if (error) {
+      return <div className="movies-empty-container"><div className="movies-empty-title">{error}</div></div>;
+    }
+    if (movies.length > 0) {
+      return (
+        <>
+          <div className="movies-results-count">{totalResults} result{totalResults !== 1 ? 's' : ''} found</div>
+          <div className="movies-grid">
+            {movies.map((movie: any) => (
+              <div
+                className="movie-card"
+                key={movie.id}
+                style={{ cursor: 'pointer', position: 'relative' }}
+                onMouseEnter={() => setHoveredCardId(movie.id)}
+                onMouseLeave={() => setHoveredCardId(null)}
+              >
+                <img
+                  src={movie.moviePoster || PLACEHOLDER_IMAGE}
+                  alt={movie.movieName}
+                  className="movie-image"
+                  onClick={() => handleCardClick(movie.id)}
+                />
+                <div className="movie-info" onClick={() => handleCardClick(movie.id)}>
+                  <div className="movie-title">{highlight(movie.movieName, debouncedSearch)}</div>
+                  <div className="movie-year">{movie.yearOfPublished}</div>
+                  <div className="movie-descr">{highlight(movie.movieDes || '', debouncedSearch)}</div>
+                </div>
+                {hoveredCardId === movie.id && (
+                  <div className="movie-card-actions">
+                    <button className="movie-edit-btn" onClick={e => { e.stopPropagation(); handleEdit(movie.id); }}>Edit</button>
+                    <button className="movie-delete-btn" onClick={e => { e.stopPropagation(); handleDelete(movie.id); }}>Delete</button>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+          <div className="movies-pagination">
+            <button className="pagination-btn" onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>Prev</button>
+            {Array.from({ length: totalPages }, (_, i) => (
+              <button
+                key={i + 1}
+                className={`pagination-btn${currentPage === i + 1 ? ' pagination-current' : ''}`}
+                onClick={() => handlePageChange(i + 1)}
+                disabled={currentPage === i + 1}
+              >
+                {i + 1}
+              </button>
+            ))}
+            <button className="pagination-btn" onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>Next</button>
+          </div>
+        </>
+      );
+    }
+    if (debouncedSearch) {
+      return (
+        <div className="movies-empty-container">
+          <div className="movies-empty-title">No movies found for "{debouncedSearch}".</div>
+        </div>
+      );
+    }
     return (
       <div className="movies-empty-container">
         <div className="movies-empty-content">
@@ -108,7 +165,7 @@ const MoviePage: React.FC = () => {
         </div>
       </div>
     );
-  }
+  };
 
   return (
     <div className="movies-container">
@@ -128,36 +185,9 @@ const MoviePage: React.FC = () => {
           )}
         </div>
       </header>
-      <div className="movies-results-count">{totalResults} result{totalResults !== 1 ? 's' : ''} found</div>
-      <div className="movies-grid">
-        {movies.map((movie: any) => (
-          <div
-            className="movie-card"
-            key={movie.id}
-            style={{ cursor: 'pointer', position: 'relative' }}
-            onMouseEnter={() => setHoveredCardId(movie.id)}
-            onMouseLeave={() => setHoveredCardId(null)}
-          >
-            <img
-              src={movie.moviePoster || PLACEHOLDER_IMAGE}
-              alt={movie.movieName}
-              className="movie-image"
-              onClick={() => handleCardClick(movie.id)}
-            />
-            <div className="movie-info" onClick={() => handleCardClick(movie.id)}>
-              <div className="movie-title">{highlight(movie.movieName, debouncedSearch)}</div>
-              <div className="movie-year">{movie.yearOfPublished}</div>
-              <div className="movie-descr">{highlight(movie.movieDes || '', debouncedSearch)}</div>
-            </div>
-            {hoveredCardId === movie.id && (
-              <div className="movie-card-actions">
-                <button className="movie-edit-btn" onClick={e => { e.stopPropagation(); handleEdit(movie.id); }}>Edit</button>
-                <button className="movie-delete-btn" onClick={e => { e.stopPropagation(); handleDelete(movie.id); }}>Delete</button>
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
+
+      {renderContent()}
+
       {/* Custom Delete Confirmation Modal */}
       {pendingDeleteId && (
         <div className="modal-overlay">
@@ -171,20 +201,6 @@ const MoviePage: React.FC = () => {
           </div>
         </div>
       )}
-      <div className="movies-pagination">
-        <button className="pagination-btn" onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>Prev</button>
-        {Array.from({ length: totalPages }, (_, i) => (
-          <button
-            key={i + 1}
-            className={`pagination-btn${currentPage === i + 1 ? ' pagination-current' : ''}`}
-            onClick={() => handlePageChange(i + 1)}
-            disabled={currentPage === i + 1}
-          >
-            {i + 1}
-          </button>
-        ))}
-        <button className="pagination-btn" onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>Next</button>
-      </div>
     </div>
   );
 };
